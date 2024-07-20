@@ -1,5 +1,6 @@
-package com.movie_project.movies;
+package com.movie_project.movies.models;
 
+import com.movie_project.movies.models.Review;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
