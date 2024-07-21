@@ -4,16 +4,19 @@ import Carousel from "react-material-ui-carousel";
 import { Paper } from "@mui/material";
 import "./hero.css";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const { movies, loading } = useContext(MovieContext);
+  const navigate = useNavigate();
+
+  const reviewClick = (id)=>{
+    navigate(`/reviews/${id}`);
+  };
 
   if (loading) {
     return <div>Loading..</div>;
   }
-
-  console.log(movies);
 
   return (
     <div className="w-screen bg-black">
@@ -43,6 +46,9 @@ const Hero = () => {
                   <Link to={`/trailer/${movie.trailerLink.substring(movie.trailerLink.indexOf("=") + 1)}`}>
                   <PlayCircleOutlineIcon sx={{ color: "gold", fontSize: 50 }} />
                   </Link>
+                </div>
+                <div className="text-white absolute w-screen z-10 items-center flex flex-col bottom-32">
+                  <button className="bg-yellow-400 cursor-pointer text-lg p-4 flex items-center justify-center lg:text-2xl" onClick={()=>reviewClick(movie.imdbId)}>reviews</button>
                 </div>
               </div>
             </div>
