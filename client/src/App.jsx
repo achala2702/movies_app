@@ -1,33 +1,22 @@
-import { useEffect } from "react";
-import axios from "axios"
+import {Routes, Route} from 'react-router-dom';
+import HomePage from "./assets/pages/HomePage";
+import TrailerPage from './assets/pages/TrailerPage';
+import Header from './assets/components/Header';
+import ReviewPage from './assets/pages/ReviewPage';
+
 
 function App() {
 
-  const url = import.meta.env.VITE_BACKEND_URL;
-
-  const getMovies = async ()=>{
-
-    try{
-      const movies = await axios.get(`${url}/api/v1/movies`);
-
-      console.log(movies);
-      
-    }catch(err){
-      console.log(err);
-    }
-
-  }
-
-  useEffect(()=>{
-    getMovies();
-  },[])
-
   return (
-    <>
-        <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-    </>
+    <div className='overflow-hidden'>
+      <Header/>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/trailer/:trailerId' element={<TrailerPage />} />
+        <Route path='/reviews/:movieId' element={<ReviewPage />} />
+      </Routes>
+    
+    </div>
   )
 }
 

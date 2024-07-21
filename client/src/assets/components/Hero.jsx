@@ -1,0 +1,62 @@
+import { useContext } from "react";
+import MovieContext from "../context/MovieContext";
+import Carousel from "react-material-ui-carousel";
+import { Paper } from "@mui/material";
+import "./hero.css";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import { Link, useNavigate } from "react-router-dom";
+
+const Hero = () => {
+  const { movies, loading } = useContext(MovieContext);
+  const navigate = useNavigate();
+
+  const reviewClick = (id)=>{
+    navigate(`/reviews/${id}`);
+  };
+
+  if (loading) {
+    return <div>Loading..</div>;
+  }
+
+  return (
+    <div className="w-screen bg-black">
+      <Carousel>
+        {movies.map((movie, index) => (
+          <Paper key={index}>
+            <div className="h-screen w-screen bg-black flex flex-col items-center">
+              <div
+                className="movie-card"
+                style={{ "--img": `url(${movie.backdrops[0]})` }}
+              >
+                <div className="absolute w-screen h-screen flex flex-col md:flex-row-reverse md:justify-between md:items-start md:px-14 lg:px-20 items-center top-20 md:top-24 lg:top-32 gap-5 z-10">
+                  <div className="h-48 lg:h-72 rounded-md">
+                    <img
+                      className="h-full w-full rounded-md"
+                      src={movie.poster}
+                      alt="movie"
+                    />
+                  </div>
+                  <div>
+                    <h1 className="text-white font-bold text-xl md:text-4xl lg:text-6xl">
+                      {movie.title}
+                    </h1>
+                  </div>
+                </div>
+                <div className="absolute w-screen items-center z-10 flex flex-col bottom-52 md:bottom-72">
+                  <Link to={`/trailer/${movie.trailerLink.substring(movie.trailerLink.indexOf("=") + 1)}`}>
+                  <PlayCircleOutlineIcon sx={{ color: "gold", fontSize: 50 }} />
+                  </Link>
+                </div>
+                <div className="text-white absolute w-screen z-10 items-center flex flex-col bottom-32">
+                  <button className="bg-yellow-400 cursor-pointer text-lg p-4 flex items-center justify-center lg:text-2xl" onClick={()=>reviewClick(movie.imdbId)}>reviews</button>
+                </div>
+              </div>
+            </div>
+          </Paper>
+        ))}
+      </Carousel>
+    </div>
+  );
+};
+
+export default Hero;
