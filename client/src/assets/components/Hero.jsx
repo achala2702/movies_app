@@ -25,7 +25,7 @@ const Hero = () => {
                 className="movie-card"
                 style={{ "--img": `url(${movie.backdrops[0]})` }}
               >
-                <div className="absolute w-screen h-screen flex flex-col md:flex-row-reverse md:justify-between md:items-start md:px-14 lg:px-20 items-center top-20 md:top-16 lg:top-20 gap-5 z-10">
+                <div className="absolute w-screen h-screen flex flex-col md:flex-row-reverse md:justify-between md:items-start md:px-14 lg:px-20 items-center top-20 md:top-24 lg:top-32 gap-5 z-10">
                   <div className="h-48 lg:h-72 rounded-md">
                     <img
                       className="h-full w-full rounded-md"
